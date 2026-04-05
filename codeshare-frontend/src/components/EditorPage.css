@@ -1,0 +1,273 @@
+.editor-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-900);
+}
+
+/* ── Header ──────────────────────────────────────────────────────── */
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 52px;
+  background: var(--bg-800);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  gap: 12px;
+  z-index: 10;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.header-right { justify-content: flex-end; }
+
+.logo-sm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+.logo-sm svg { color: var(--accent); }
+
+.room-id-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-700);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 3px 12px;
+  font-size: 12px;
+}
+.room-id-pill code {
+  font-family: var(--font-mono);
+  color: var(--accent-light);
+  letter-spacing: 0.05em;
+}
+
+.conn-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.conn-badge.connected {
+  background: rgba(78,205,196,0.12);
+  color: var(--success);
+  border: 1px solid rgba(78,205,196,0.25);
+}
+.conn-badge.disconnected {
+  background: rgba(255,166,0,0.12);
+  color: var(--warning);
+  border: 1px solid rgba(255,166,0,0.25);
+}
+
+.unread-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 99px;
+  padding: 1px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.btn-success-flash {
+  background: rgba(78,205,196,0.15);
+  color: var(--success);
+  border: 1px solid rgba(78,205,196,0.3);
+}
+
+/* ── Body ────────────────────────────────────────────────────────── */
+.editor-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.editor-main {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Toast notifications ─────────────────────────────────────────── */
+.notif-stack {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 100;
+  pointer-events: none;
+}
+.notif {
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  backdrop-filter: blur(12px);
+  animation: slideInRight 0.3s ease, fadeOut 0.3s ease 3.2s forwards;
+  pointer-events: none;
+}
+.notif-join {
+  background: rgba(78,205,196,0.15);
+  border: 1px solid rgba(78,205,196,0.3);
+  color: var(--success);
+}
+.notif-leave {
+  background: rgba(255,107,107,0.1);
+  border: 1px solid rgba(255,107,107,0.2);
+  color: var(--danger);
+}
+.notif-info {
+  background: var(--bg-600);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ── Plan badge in header ──────────────────────────────────────────── */
+.editor-plan-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--badge-color, #9ca3af);
+  background: color-mix(in srgb, var(--badge-color, #9ca3af) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--badge-color, #9ca3af) 35%, transparent);
+  flex-shrink: 0;
+}
+
+/* ── View-only banner ─────────────────────────────────────────────── */
+.view-only-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 107, 107, 0.12);
+  border-bottom: 1px solid rgba(255, 107, 107, 0.25);
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* ── View-only overlay on editor ─────────────────────────────────── */
+.view-only-overlay {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+}
+.view-only-overlay-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  background: rgba(255, 107, 107, 0.15);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 99px;
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
+}
+
+/* ── Collaborator limit banner ────────────────────────────────────── */
+.collab-limit-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(255, 209, 102, 0.1);
+  border-bottom: 1px solid rgba(255, 209, 102, 0.25);
+  color: var(--warning);
+  font-size: 13px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ── Ad banner ────────────────────────────────────────────────────── */
+.ad-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, rgba(22, 24, 42, 0.97), rgba(26, 29, 50, 0.97));
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  z-index: 200;
+  font-size: 13px;
+}
+.ad-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  background: var(--bg-600);
+  padding: 2px 6px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.ad-text {
+  flex: 1;
+  color: var(--text-secondary);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ad-dismiss {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 4px 8px;
+  flex-shrink: 0;
+  transition: color var(--transition);
+}
+.ad-dismiss:hover { color: var(--text-primary); }
+
